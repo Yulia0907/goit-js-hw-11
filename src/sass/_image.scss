@@ -1,7 +1,33 @@
 // body {
 //     font-family: 'Montserrat', sans-serif;
 //   }
-  
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+a {
+  text-decoration: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  margin: -1px;
+}
   .search {
     background-color: #5569c4;
     height: 18%;
@@ -98,11 +124,13 @@ input {
     align-items: center;
     justify-content: center;
     padding: 0 8px;
+    color: #000;
   }
 
   .info-item-span {
     font-size: 13px;
     padding-top: 5px;
+    
   }
   
   
