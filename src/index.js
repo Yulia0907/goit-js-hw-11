@@ -1,10 +1,20 @@
 import {createGalleryMarkup} from './utils/markup';
 import ApiServise from './utils/apiService';
+import { lightbox } from './utils/lightbox';
 
-import SimpleLightbox from 'simplelightbox';
-import 'simplelightbox/dist/simple-lightbox.min.css';
 import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
+
+
+const simpleLigthbox = new SimpleLightbox('.gallery a', {
+    nav: true,
+    close: true,
+    caption: true,
+    captionsData: 'alt',
+    captionPosition: 'bottom',
+    captionDelay: 250,
+  });
 
 const refs = {
     form: document.querySelector('.search-form'),
@@ -12,26 +22,16 @@ const refs = {
     bntLoadMore: document.querySelector('.load-more'),
 };
 
-// bntLoadMore.style.display = 'none';
 
 refs.form.addEventListener('submit', onFormSubmit);
 refs.bntLoadMore.addEventListener('click', handleLoadMore);
 const apiImageServise = new ApiServise();
-let gallerySimpleLightbox = new SimpleLightbox('.gallery a');
-// let lightbox = new SimpleLightbox('.gallery a', { 
-//     captions: true,
-//     captionsData: 'alt',
-//     captionDelay: 250, 
-//     });
 
-// console.log(lightbox);
-
-console.log(gallerySimpleLightbox);
 
 async function onFormSubmit(event) {
     event.preventDefault();
 
-    const searchQuery = event.currentTarget.elements.searchQuery.value;
+    const searchQuery = event.currentTarget.searchQuery.value;
 
     console.log(searchQuery);
 
@@ -41,12 +41,9 @@ async function onFormSubmit(event) {
     const images = await apiImageServise.getImages();
 
     refs.gallery.innerHTML = createGalleryMarkup(images);
+    lightbox.refresh();
 
-    gallerySimpleLightbox.refresh();
 
-    
-
-    // lightbox.refresh();
 };
 
 
@@ -55,15 +52,9 @@ async function handleLoadMore() {
     const images = await apiImageServise.getImages(); 
 
     refs.gallery.insertAdjacentHTML('beforeend', createGalleryMarkup(images));
+    lightbox.refresh();
 
-    // lightbox.refresh();
+
+
 
 }
-
-
-
-// function cleanGallery() {
-//     gallery.innerHTML = '';
-//     pageNumber = 1;
-//     btnLoadMore.style.display = 'none';
-//   }
