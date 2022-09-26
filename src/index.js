@@ -30,32 +30,36 @@ const refs = {
      apiImageServise.getImages()   
      .then(data => {
        refs.gallery.innerHTML = '';
-       refs.bntLoadMore.classList.remove('visually-hidden');  
+       refs.bntLoadMore.classList.remove('.visually-hidden');  
   
-       data.totalPages = Math.ceil(data.totalHits / 40);
+       
    
 
        if (!data.totalHits) {        
          Notify.failure(
            `Sorry, there are no images matching your search query. Please try again.`,
          );
-         refs.bntLoadMore.classList.add('visually-hidden');
+         refs.bntLoadMore.classList.add('.visually-hidden');
          return;
        };  
 
        onRenderGallery(data);
 
-       if (data.totalHits < data.totalPages) {       
-        apiImageServise.incrementPage();
-        Notiflix.info("We're sorry, but you've reached the end of search results.");
-        refs.bntLoadMore.classList.add('visually-hidden');
-      };
+       
 
         if (data.totalHits > 1) {     
        Notify.success(`Hooray! We found ${data.totalHits} images !!!`);       ;
-      refs.bntLoadMore.classList.remove('visually-hidden');
+      refs.bntLoadMore.classList.remove('.visually-hidden');
+
+ 
+      let numberPages = data.totalHits / 40;
         
-        
+        if ((data.totalHits.length) = Math.ceil(numberPages)) {       
+        apiImageServise.incrementPage();
+        Notify.failure(`We're sorry, but you've reached the end of search results.`);
+        refs.bntLoadMore.classList.add('.visually-hidden');
+      };
+
 const options = {
   rootMargin: '50px',
   root: null,

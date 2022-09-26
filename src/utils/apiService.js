@@ -5,7 +5,7 @@ export default class ApiService {
       this.searchQuery = '';
       this.page = 1;  
       this.PER_PAGE = 40;
-      this.totalHits = 0;
+      this.totalHits = null;
       this.totalPages = 0;
       this.endOfHits = false;
       
