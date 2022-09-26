@@ -5,7 +5,7 @@ export default class ApiService {
       this.searchQuery = '';
       this.page = 1;  
       this.PER_PAGE = 40;
-      this.totalHits = null;
+      this.totalHits = 0;
       this.totalPages = 0;
       this.endOfHits = false;
       
@@ -34,11 +34,12 @@ export default class ApiService {
     } catch (error) {
       console.error(error);
     }
+    
   }   
   
-    incrementPage() {
-      this.page += 1;
-    }
+  incrementPage() {
+    this.page += 1;
+  }
   
     resetPage() {
       this.page = 1;
